@@ -1,57 +1,20 @@
 ---
+# The configuration.yaml is only used to bootstrap the system.
 #
-# Dummy secrets to upload to GitHub and Travis
-#
-# @link https://www.home-assistant.io/docs/configuration/
-#
-
 # https://www.home-assistant.io/docs/configuration/basic/
+#
 homeassistant:
   name: Casa
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  elevation: !secret home_elevation
   unit_system: metric
   time_zone: !secret home_time_zone
-
-# https://www.home-assistant.io/integrations/cloud/
-cloud:
-
-# https://www.home-assistant.io/integrations/config/
-config:
-
-# https://www.home-assistant.io/integrations/frontend/
-frontend:
-
-# https://www.home-assistant.io/integrations/history/
-history:
-
-# https://www.home-assistant.io/integrations/logbook/
-logbook:
-
-# https://www.home-assistant.io/integrations/map/
-map:
+  # Load packages
+  packages: !include_dir_named integrations
 
 # https://companion.home-assistant.io/en/getting_started/migration#requirements
 mobile_app:
 
-# https://companion.home-assistant.io/en/getting_started/migration#requirements
-ios:
-
-# https://www.home-assistant.io/integrations/person/
-person:
-
 # https://www.home-assistant.io/integrations/ssdp/
 ssdp:
-
-# https://www.home-assistant.io/integrations/sun/
-sun:
-
-# https://www.home-assistant.io/integrations/system_health/
-system_health:
-
-# https://www.home-assistant.io/integrations/updater/
-updater:
 
 # https://www.home-assistant.io/integrations/zeroconf/
 zeroconf:
@@ -63,79 +26,6 @@ discovery:
     - homekit
     - google_cast
 
-# https://www.home-assistant.io/integrations/media_player/
-media_player:
-  # https://www.home-assistant.io/integrations/braviatv/
-  - platform: braviatv
-    host: 192.168.1.154
-
-# https://www.home-assistant.io/integrations/device_tracker/
-device_tracker:
-  # https://www.home-assistant.io/integrations/tomato/
-  - platform: tomato
-    host: 192.168.1.2
-    username: !secret tomato_username
-    password: !secret tomato_password
-    http_id: !secret tomato_http_id
-    interval_seconds: 10
-    consider_home: 180
-    new_device_defaults:
-      track_new_devices: false
-
-# https://www.home-assistant.io/integrations/speedtestdotnet/
-speedtestdotnet:
-  scan_interval:
-    days: 1
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-
-# https://www.home-assistant.io/integrations/alexa.smart_home/
-alexa:
-  smart_home:
-    endpoint: https://api.amazonalexa.com/v3/events
-    client_id: !secret alexa_client_id
-    client_secret: !secret alexa_client_secret
-    filter:
-      exclude_domains:
-        - group
-      exclude_entities:
-        - binary_sensor.updater
-
-# https://www.home-assistant.io/integrations/google_assistant/
-# google_assistant:
-
-# https://www.home-assistant.io/integrations/yeelight/
-yeelight:
-  devices:
-    192.168.1.151:
-        name: Desk Lamp
-    192.168.1.152:
-        name: Led Stripe
-    192.168.1.153:
-        name: Bedside Lamp
-
-# https://www.home-assistant.io/integrations/group/
-group:
-
-# https://www.home-assistant.io/integrations/automation/
-automation:
-
-# https://www.home-assistant.io/integrations/script/
-script:
-
-# https://www.home-assistant.io/integrations/scene/
-scene:
-
-# https://www.home-assistant.io/integrations/zone/
-zone:
-  - name: Work
-    latitude: !secret work_latitude
-    longitude: !secret work_longitude
-    radius: 250
-    icon: mdi:briefcase
-
 # https://www.home-assistant.io/integrations/sensor/
 sensor:
   # https://www.home-assistant.io/integrations/google_travel_time/
@@ -146,6 +36,15 @@ sensor:
     destination: zone.work
 
 # https://www.home-assistant.io/integrations/weather.darksky/
-weather:
-  - platform: darksky
-    api_key: !secret dark_sky_api_key
+#weather:
+#  - platform: darksky
+#    api_key: !secret dark_sky_api_key
+
+# https://www.home-assistant.io/integrations/google_assistant/
+# google_assistant:
+
+# https://companion.home-assistant.io/en/getting_started/migration#requirements
+# ios:
+
+# https://www.home-assistant.io/integrations/cloud/
+# cloud:
