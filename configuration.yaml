@@ -127,6 +127,7 @@ script:
 # https://www.home-assistant.io/integrations/scene/
 scene:
 
+# https://www.home-assistant.io/integrations/zone/
 zone:
   - name: Work
     latitude: !secret work_latitude
@@ -134,6 +135,7 @@ zone:
     radius: 250
     icon: mdi:briefcase
 
+# https://www.home-assistant.io/integrations/sensor/
 sensor:
   # https://www.home-assistant.io/integrations/google_travel_time/
   - platform: google_travel_time
@@ -141,3 +143,8 @@ sensor:
     api_key: !secret google_distance_matrix_api
     origin: zone.home
     destination: zone.work
+
+# https://www.home-assistant.io/integrations/weather.darksky/
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
