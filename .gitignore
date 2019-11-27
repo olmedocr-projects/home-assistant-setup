@@ -8,7 +8,7 @@
 *
 
 # You can whitelist files/folders with !, these will not be ignored.
-!*.yaml
+!*.yml
 !.gitignore
 !*.md
 
@@ -19,5 +19,5 @@
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml
-secrets.yaml
+secrets.yml
 known_devices.yaml
