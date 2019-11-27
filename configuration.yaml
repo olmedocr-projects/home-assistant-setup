@@ -109,12 +109,12 @@ alexa:
 # https://www.home-assistant.io/integrations/yeelight/
 yeelight:
   devices:
-      192.168.1.151:
-          name: Desk Lamp
-      192.168.1.152:
-          name: Led Stripe
-      192.168.1.153:
-          name: Bedside Lamp
+    192.168.1.151:
+        name: Desk Lamp
+    192.168.1.152:
+        name: Led Stripe
+    192.168.1.153:
+        name: Bedside Lamp
 
 # https://www.home-assistant.io/integrations/group/
 group:
