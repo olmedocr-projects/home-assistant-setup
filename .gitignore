@@ -1,0 +1,23 @@
+#
+# Gitignore file to avoid uploading sensitive info and garbage to GitHub
+#
+# @link https://www.home-assistant.io/docs/ecosystem/backup/backup_github/#step-2-creating-gitignore
+#
+
+# A * ensures that everything will be ignored.
+*
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
