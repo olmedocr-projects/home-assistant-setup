@@ -3,4 +3,4 @@ name: Raul
 id: raul
 user_id: !secret raul_user_id
 device_trackers:
-  # TODO:
+# TODO:

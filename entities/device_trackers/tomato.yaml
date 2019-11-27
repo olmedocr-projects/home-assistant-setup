@@ -2,7 +2,7 @@
 # TODO:
 # https://www.home-assistant.io/integrations/tomato/
 #
-platform: tomato.yaml
+platform: tomato
   host: 192.168.1.2
   username: !secret tomato_username
   password: !secret tomato_password
