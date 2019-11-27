@@ -10,14 +10,11 @@ python:
   - 3.7
 
 before_install:
-  - mv dummy_secrets.yaml secrets.yaml
-  #- sudo apt-get install -y libudev-dev
+  - mv travis_secrets.yaml secrets.yaml
+  - sudo apt-get install -y libudev-dev
 
 install:
-  - pip install yamllint
-  #- pip install -I homeassistant==$(cat config/.HA_VERSION)
-  - pip install homeassistant
+  - pip3 install homeassistant
 
 script:
-  - yamllint .
   - hass -c . --script check_config
