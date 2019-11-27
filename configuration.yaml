@@ -36,7 +36,7 @@ sensor:
     destination: zone.work
 
 # https://www.home-assistant.io/integrations/weather.darksky/
-#weather:
+# weather:
 #  - platform: darksky
 #    api_key: !secret dark_sky_api_key
 

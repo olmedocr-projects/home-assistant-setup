@@ -1,0 +1,12 @@
+---
+# TODO:
+#
+platform: tomato.yaml
+  host: 192.168.1.2
+  username: !secret tomato_username
+  password: !secret tomato_password
+  http_id: !secret tomato_http_id
+  interval_seconds: 10
+  consider_home: 180
+  new_device_defaults:
+    track_new_devices: false

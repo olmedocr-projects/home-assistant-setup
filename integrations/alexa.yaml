@@ -1,0 +1,6 @@
+---
+# This loads up the alexa integration
+#
+# https://www.home-assistant.io/integrations/alexa.smart_home/
+#
+alexa: !include_dir_list ../assistants/alexa

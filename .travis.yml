@@ -2,7 +2,7 @@
 #
 # Travis CI configuration
 #
-# @link https://home-assistant.io/docs/ecosystem/backup/backup_github/#step-7-configuration-file-testing
+# https://home-assistant.io/docs/ecosystem/backup/backup_github/#step-7-configuration-file-testing
 #
 
 language: python

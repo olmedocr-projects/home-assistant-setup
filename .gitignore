@@ -5,13 +5,7 @@
 #
 
 # A * ensures that everything will be ignored.
-*
-
-# You can whitelist files/folders with !, these will not be ignored.
-!/.travis.yml
-!*.yaml
-!.gitignore
-!*.md
+.idea/
 
 # Ignore folders.
 .storage
@@ -22,3 +16,5 @@
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
+
+!/entities/*
