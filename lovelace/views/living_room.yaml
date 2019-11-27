@@ -1,0 +1,35 @@
+---
+path: living_room
+  title: Salon
+  badges:
+    - entity: binary_sensor.updater
+    - entity: person.raul
+    - entity: sensor.speedtest_upload
+    - entity: sensor.speedtest_ping
+    - entity: sensor.speedtest_download
+    - entity: sensor.home_to_work
+    - entity: sun.sun
+  cards:
+    - type: entity-filter
+      entities:
+        - device_tracker.raul
+      state_filter:
+        - 'casa'
+      card:
+        type: glance
+        title: Gente en casa
+    - type: entities
+      entities:
+        - light.led_stripe
+        - light.bedside_lamp
+        - light.desk_lamp
+      title: Luz
+    - type: custom:weather-card
+      entity: weather.casa
+      current: true
+      details: true
+      forecast: true
+    - type: media-control
+      entity: media_player.sony_bravia_tv
+    - type: media-control
+      entity: media_player.playstation_4
