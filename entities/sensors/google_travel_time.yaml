@@ -1,0 +1,9 @@
+---
+# TODO:
+# https://www.home-assistant.io/integrations/google_travel_time/
+#
+platform: google_travel_time
+  name: Home To Work
+  api_key: !secret google_distance_matrix_api
+  origin: zone.home
+  destination: zone.work

@@ -21,19 +21,6 @@ zeroconf:
 
 # https://www.home-assistant.io/integrations/discovery/
 discovery:
-  ignore:
-    - igd
-    - homekit
-    - google_cast
-
-# https://www.home-assistant.io/integrations/sensor/
-sensor:
-  # https://www.home-assistant.io/integrations/google_travel_time/
-  - platform: google_travel_time
-    name: Home To Work
-    api_key: !secret google_distance_matrix_api
-    origin: zone.home
-    destination: zone.work
 
 # https://www.home-assistant.io/integrations/weather.darksky/
 # weather:

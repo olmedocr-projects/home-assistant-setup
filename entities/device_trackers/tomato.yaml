@@ -1,5 +1,6 @@
 ---
 # TODO:
+# https://www.home-assistant.io/integrations/tomato/
 #
 platform: tomato.yaml
   host: 192.168.1.2
