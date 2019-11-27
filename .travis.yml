@@ -1,0 +1,23 @@
+#
+# Travis CI configuration
+#
+# @link https://home-assistant.io/docs/ecosystem/backup/backup_github/#step-7-configuration-file-testing
+#
+
+language: python
+
+python:
+  - 3.7
+
+before_install:
+  - mv dummy_secrets.yml secrets.yml
+  #- sudo apt-get install -y libudev-dev
+
+install:
+  - pip install yamllint
+  #- pip install -I homeassistant==$(cat config/.HA_VERSION)
+  - pip install homeassistant
+
+script:
+  - yamllint .
+  - hass -c . --script check_config
