@@ -5,12 +5,19 @@
 #
 
 language: python
+
 python:
-  - "3.7"
+  - 3.7
+
 before_install:
   - mv dummy_secrets.yaml secrets.yaml
-  - sudo apt-get install -y libudev-dev
+  #- sudo apt-get install -y libudev-dev
+
 install:
-  - pip3 install homeassistant
+  - pip install yamllint
+  #- pip install -I homeassistant==$(cat config/.HA_VERSION)
+  - pip install homeassistant
+
 script:
+  - yamllint .
   - hass -c . --script check_config
