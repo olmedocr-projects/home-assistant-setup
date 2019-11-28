@@ -3,35 +3,109 @@ path: dashboard
 title: Panel de Control
 badges:
   - entity: binary_sensor.updater
+  - entity: sensor.hacs
   - entity: person.raul
-  - entity: sensor.speedtest_upload
-  - entity: sensor.speedtest_ping
-  - entity: sensor.speedtest_download
-  - entity: sensor.home_to_work
   - entity: sun.sun
 cards:
-  - type: entities
+  - type: custom:weather-card
+    entity: weather.dark_sky
+
+  - type: custom:travel-time-card
+    entity: sensor.home_to_work
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        icon: mdi-download-network
+        entities:
+          - sensor.speedtest_download
+        line_color: blue
+        line_width: 8
+        font_size: 75
+
+      - type: custom:mini-graph-card
+        icon: mdi-upload-network
+        entities:
+          - sensor.speedtest_upload
+        line_color: blue
+        line_width: 8
+        font_size: 75
+
+      - type: custom:mini-graph-card
+        icon: mdi-timer
+        entities:
+          - sensor.speedtest_ping
+        line_color: blue
+        line_width: 8
+        font_size: 75
+
+  - type: custom:mini-graph-card
+    icon: mdi-gauge
     entities:
-      - light.led_stripe
-      - light.bedside_lamp
-      - light.desk_lamp
-    title: Luz
+      - sensor.processor_use
+    show:
+      labels: true
+    color_thresholds:
+      - value: 20
+        color: green
+      - value: 50
+        color: yellow
+      - value: 80
+        color: red
 
-  - type: custom:weather-card
-    entity: weather.casa
-    current: true
-    details: true
-    forecast: true
-    mode: daily
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        icon: mdi-disk
+        name: Uso del Disco
+        unit: '%'
+        entity: sensor.disk_use_percent
+        severity:
+          green: 0
+          yellow: 45
+          red: 85
 
-  - type: custom:weather-card
-    entity: weather.dark_sky
+      - type: gauge
+        icon: mdi-memory
+        name: Uso de la Memoria
+        unit: '%'
+        entity: sensor.memory_use_percent
+        severity:
+          green: 0
+          yellow: 45
+          red: 85
 
-  - type: weather-forecast
-    entity: weather.casa
+  - type: glance
+    columns: 4
+    show_name: true
+    entities:
+      - entity: sensor.home_assistant_v2_db
+        name: Base de Datos
+        icon: mdi:database
+        hold_action:
+          action: call-service
+          service: recorder.purge # purges db keeping last 3 days only
+          data:
+            keep_days: 3
+            repack: true
 
-  - type: weather-forecast
-    entity: weather.dark_sky
+      - entity: sensor.home_assistant_log
+        name: Log
+        icon: mdi:file-alert-outline
+        tap_action:
+          action: navigate
+          navigation_path: /dev-info # goes to log in HA when tapped
+        hold_action:
+          action: call-service
+          service: system_log.clear # clears log in HA when long-pressed
 
-  - type: media-control
-    entity: media_player.sony_bravia_tv
+      - entity: sensor.time_online
+        name: Tiempo Encendido
+        hold_action:
+          action: call-service
+          service: homeassistant.restart # restarts HA when long-pressed
+
+      - entity: sensor.version_installed
+        tap_action:
+          action: navigate
+          navigation_path: /hassio/dashboard # goes to Hassio update section when tapped

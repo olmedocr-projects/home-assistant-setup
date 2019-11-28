@@ -4,4 +4,4 @@ title: Salon
 badges:
 cards:
   - type: media-control
-    entity: media_player.playstation_4
+    entity: media_player.sony_bravia_tv

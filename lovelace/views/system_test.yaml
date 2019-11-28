@@ -1,0 +1,176 @@
+---
+# https://community.home-assistant.io/t/system-monitoring-how-does-your-look/109713/4
+title: System
+icon: 'mdi:settings'
+path: system
+badges: []
+cards:
+
+  - type: horizontal-stack
+    cards:
+
+      #### THEME SWITCHER
+      - type: "custom:button-card"
+        entity: input_select.theme_switcher
+        icon: mdi:cube-outline
+        show_state: true
+        show_name: false
+        # tapping on this button cycles through each theme
+        tap_action:
+          action: call-service
+          service: input_select.select_next
+          service_data:
+            entity_id: input_select.theme_switcher
+          haptic: selection
+        # long pressing on this button goes back to my primary theme (Slate)
+        hold_action:
+          action: call-service
+          service: input_select.select_option
+          service_data:
+            entity_id: input_select.theme_switcher
+            option: slate
+        size: 20%
+        color_type: icon
+
+      # this does the same as the above button, but goes backwards instead of forwards. might end up removing it, dunno.
+      - type: "custom:button-card"
+        entity: input_select.theme_switcher
+        icon: mdi:arrow-left-circle
+        name: Previous Theme
+        show_state: false
+        show_name: true
+        tap_action:
+          action: call-service
+          service: input_select.select_previous
+          service_data:
+            entity_id: input_select.theme_switcher
+          haptic: selection
+        size: 20%
+        color_type: icon
+
+  #### HOME ASSISTANT INFO AT A GLANCE
+  - type: vertical-stack
+    cards:
+      - type: glance
+        columns: 6 #tweak this later
+        show_name: true
+        entities:
+          - entity: sensor.total_sensors
+            name: Sensors
+          - entity: sensor.total_automations
+            name: Auto
+            hold_action:
+              action: call-service
+              service: automation.reload # reloads automations when long-pressed
+          - entity: sensor.total_scripts
+            hold_action:
+              action: call-service
+              service: script.reload # reloads scripts when long-pressed
+          - entity: sensor.total_devicetrackers
+          - entity: sensor.total_switches
+          - entity: sensor.total_lights
+            tap_action:
+              action: navigate # goes to my Lights page when tapped
+              navigation_path: /lovelace/lights/
+          - entity: sensor.total_zones
+          - entity: sensor.total_binary_sensors
+          - entity: sensor.total_input_booleans
+            name: Booleans
+          - entity: sensor.total_input_numbers
+            name: Numbers
+          - entity: sensor.total_input_texts
+            name: Texts
+          - entity: sensor.total_input_selects
+            name: Selects
+          - entity: sensor.total_media_players
+            name: Players
+            tap_action:
+              action: navigate # goes to my Media page when tapped
+              navigation_path: /lovelace/media/
+          - entity: sensor.total_cameras
+          - entity: sensor.total_zwave_devices
+          - entity: sensor.total_entities
+            hold_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.system_update_template_sensors # long-pressing updates statistics
+
+
+      - type: glance
+        columns: 4
+        show_name: true
+        entities:
+          - entity: sensor.home_assistant_v2_db
+            name: Database
+            icon: mdi:database
+            hold_action:
+              action: call-service
+              service: recorder.purge # purges db keeping last 3 days only
+              data:
+                keep_days: 3
+                repack: true
+
+          - entity: sensor.home_assistant_log
+            name: Logfile
+            icon: mdi:file-alert-outline
+            tap_action:
+              action: navigate
+              navigation_path: /dev-info # goes to log in HA when tapped
+            hold_action:
+              action: call-service
+              service: system_log.clear # clears log in HA when long-pressed
+
+          - entity: sensor.time_online
+            name: Uptime
+            hold_action:
+              action: call-service
+              service: homeassistant.restart # restarts HA when long-pressed
+
+          - entity: sensor.version_installed
+            tap_action:
+              action: navigate
+              navigation_path: /hassio/dashboard # goes to Hassio update section when tapped
+
+  #### SPEEDETEST INTEGRATION WIP IMPROVE LATER
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.speedtest_download
+            name: Download
+            line_color: lightblue
+            line_width: 8
+
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.speedtest_upload
+            name: Upload
+            line_color: orange
+            line_width: 8
+
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.speedtest_ping
+            name: Ping
+            line_color: lightgreen
+            line_width: 8
+
+      ## Not sure if keeping this, if so it'd probably be a conditional card
+      - type: vertical-stack
+        cards:
+          - type: glance
+            show_header_toggle: false
+            entities:
+              - entity: sensor.external_ip
+                name: External IP
+                icon: mdi:earth
+
+              - entity: sensor.speedtest_last_updated
+                name: Last Speedtest
+
+              - entity: script.speedtest_update
+                name: Update Speedtest
+                # tap_action:
