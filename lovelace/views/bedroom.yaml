@@ -1,0 +1,14 @@
+---
+path: bedroom
+title: Dormitorio
+badges:
+cards:
+  - type: entities
+    entities:
+      - light.led_stripe
+      - light.bedside_lamp
+      - light.desk_lamp
+    title: Luces
+
+  - type: media-control
+    entity: media_player.playstation_4
