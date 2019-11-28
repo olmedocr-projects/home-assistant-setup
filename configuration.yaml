@@ -22,11 +22,6 @@ zeroconf:
 # https://www.home-assistant.io/integrations/discovery/
 discovery:
 
-# https://www.home-assistant.io/integrations/weather.darksky/
-# weather:
-#  - platform: darksky
-#    api_key: !secret dark_sky_api_key
-
 # https://www.home-assistant.io/integrations/google_assistant/
 # google_assistant:
 
