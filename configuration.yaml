@@ -1,32 +1,14 @@
 ---
 # The configuration.yaml is only used to bootstrap the system.
 #
-# https://www.home-assistant.io/docs/configuration/basic/
 #
 homeassistant:
-  # name: Casa
-  # unit_system: metric
-  # time_zone: !secret home_time_zone
+  name: Casa
+  unit_system: metric
+  time_zone: !secret home_time_zone
+  elevation: !secret home_elevation
+
   # Load packages
   packages: !include_dir_named integrations
-
-# https://companion.home-assistant.io/en/getting_started/migration#requirements
-mobile_app:
-
-# https://www.home-assistant.io/integrations/ssdp/
-ssdp:
-
-# https://www.home-assistant.io/integrations/zeroconf/
-zeroconf:
-
-# https://www.home-assistant.io/integrations/discovery/
-discovery:
-
-# https://www.home-assistant.io/integrations/google_assistant/
-# google_assistant:
-
-# https://companion.home-assistant.io/en/getting_started/migration#requirements
-# ios:
-
-# https://www.home-assistant.io/integrations/cloud/
-# cloud:
+  whitelist_external_dirs:
+      - /config

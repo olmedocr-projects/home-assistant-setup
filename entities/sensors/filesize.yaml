@@ -2,3 +2,4 @@
 platform: filesize
 file_paths:
   - /config/home-assistant_v2.db
+

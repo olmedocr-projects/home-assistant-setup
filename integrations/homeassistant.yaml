@@ -1,10 +1,32 @@
 ---
 # Sets up Home Assistant.
 #
-# Basically, everything that doesn't have to be in the
-# main configuration.yaml.
+# https://www.home-assistant.io/docs/configuration/basic/
 #
 homeassistant:
+  whitelist_external_dirs:
+    - /config/
+
+  # https://companion.home-assistant.io/en/getting_started/migration#requirements
+  mobile_app:
+
+  # https://www.home-assistant.io/integrations/ssdp/
+  ssdp:
+
+  # https://www.home-assistant.io/integrations/zeroconf/
+  zeroconf:
+
+  # https://www.home-assistant.io/integrations/discovery/
+  # discovery:
+
+  # https://www.home-assistant.io/integrations/google_assistant/
+  # google_assistant:
+
+  # https://companion.home-assistant.io/en/getting_started/migration#requirements
+  # ios:
+
+  # https://www.home-assistant.io/integrations/cloud/
+  # cloud:
 
   # Lets me customize individual entities
   customize: !include_dir_merge_named ../customizations/entities

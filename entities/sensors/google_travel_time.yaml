@@ -4,7 +4,7 @@
 #
 platform: google_travel_time
 scan_interval: 300
-name: Commute Time
+name: Al Trabajo
 api_key: !secret google_distance_matrix_api
 origin: zone.home
 destination: zone.work

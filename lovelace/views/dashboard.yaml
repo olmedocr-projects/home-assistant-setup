@@ -3,7 +3,7 @@ path: dashboard
 title: Panel de Control
 badges:
   - entity: binary_sensor.updater
-  - entity: automation.hacs_upgrade_alert
+  - entity: sensor.hacs
   - entity: person.raul
   - entity: device_tracker.iphone_de_raul
   - entity: sun.sun
@@ -12,102 +12,84 @@ cards:
     entity: weather.dark_sky
 
   - type: custom:travel-time-card
-    entity: sensor.commute_time
+    title: Tiempo de Viaje
+    columns:
+      - name
+      - duration
+      - distance
+    entities:
+      - entity: sensor.al_trabajo
 
   - type: vertical-stack
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            icon: mdi:download-network
-            name: Bajada
-            entities:
-              - sensor.speedtest_download
-            line_color: light-blue
-            line_width: 8
-            font_size: 75
+      - type: custom:mini-graph-card
+        icon: mdi:thermometer
+        name: Temperatura de la CPU
+        hour24: true
+        hours_to_show: 6
+        points_per_hour: 0.15
+        entities:
+          - sensor.cpu_temperature
+        show:
+          labels: true
+        color_thresholds:
+          - value: 0
+            color: '#388e3c'
+          - value: 55
+            color: '#ffeb3b'
+          - value: 70
+            color: '#d32f2f'
 
-          - type: custom:mini-graph-card
-            icon: mdi:upload-network
-            name: Subida
-            entities:
-              - sensor.speedtest_upload
-            line_color: light-blue
-            line_width: 8
-            font_size: 75
+      - type: custom:mini-graph-card
+        icon: mdi:memory
+        name: Uso de la RAM
+        hour24: true
+        hours_to_show: 6
+        points_per_hour: 0.15
+        entities:
+          - sensor.memory_use_percent
+        show:
+          labels: true
+        color_thresholds:
+          - value: 0
+            color: '#388e3c'
+          - value: 50
+            color: '#ffeb3b'
+          - value: 80
+            color: '#d32f2f'
 
-          - type: custom:mini-graph-card
-            icon: mdi:speedometer
-            name: Ping
-            entities:
-              - sensor.speedtest_ping
-            line_color: light-blue
-            line_width: 8
-            font_size: 75
+      - type: custom:mini-graph-card
+        icon: mdi:memory
+        name: Uso de la CPU
+        hour24: true
+        hours_to_show: 6
+        points_per_hour: 0.15
+        entities:
+          - sensor.processor_use
+        show:
+          labels: true
+        color_thresholds:
+          - value: 0
+            color: '#388e3c'
+          - value: 50
+            color: '#ffeb3b'
+          - value: 80
+            color: '#d32f2f'
 
-      - type: entity-button
-        icon: mdi:reload
-        name: Test de Velocidad
-        tap_action:
-          action: call-service
-          service: speedtestdotnet.speedtest
-
-  - type: custom:mini-graph-card
-    icon: mdi:thermometer
-    entities:
-      - sensor.cpu_temperature
-    show:
-      labels: true
-    color_thresholds:
-      - value: 20
-        color: green
-      - value: 50
-        color: yellow
-      - value: 80
-        color: red
-
-  - type: custom:mini-graph-card
-    icon: mdi:memory
-    entities:
-      - sensor.memory_use_percent
-    show:
-      labels: true
-    color_thresholds:
-      - value: 20
-        color: green
-      - value: 50
-        color: yellow
-      - value: 80
-        color: red
-
-  - type: custom:mini-graph-card
-    icon: mdi:thermometer
-    entities:
-      - sensor.processor_use
-    show:
-      labels: true
-    color_thresholds:
-      - value: 20
-        color: green
-      - value: 50
-        color: yellow
-      - value: 80
-        color: red
-
-  - type: horizontal-stack
-    cards:
-      - type: gauge
-        icon: mdi:harddisk
-        name: Uso del Disco
-        unit: '%'
-        entity: sensor.disk_use_percent_home
-        severity:
-          green: 0
-          yellow: 45
-          red: 85
+  - type: custom:bar-card
+    title: Almacenamiento
+    icon: mdi:hard-disk
+    entity: sensor.disk_use_percent_home
+    severity:
+    - value: 33
+      color: '#388e3c'
+    - value: 66
+      color: '#ffeb3b'
+    - value: 100
+      color: '#d32f2f'
 
   - type: glance
-    columns: 4
+    columns: 3
     show_name: true
     entities:
       - entity: sensor.home_assistant_v2_db
@@ -136,9 +118,3 @@ cards:
         hold_action:
           action: call-service
           service: homeassistant.restart # restarts HA when long-pressed
-
-      - entity: sensor.version_installed
-        icon: mdi:information-outline
-        tap_action:
-          action: navigate
-          navigation_path: /hassio/dashboard # goes to Hassio update section when tapped
