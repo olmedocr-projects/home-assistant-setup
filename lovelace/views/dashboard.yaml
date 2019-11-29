@@ -3,44 +3,85 @@ path: dashboard
 title: Panel de Control
 badges:
   - entity: binary_sensor.updater
-  - entity: sensor.hacs
+  - entity: automation.hacs_upgrade_alert
   - entity: person.raul
+  - entity: device_tracker.iphone_de_raul
   - entity: sun.sun
 cards:
   - type: custom:weather-card
     entity: weather.dark_sky
 
   - type: custom:travel-time-card
-    entity: sensor.home_to_work
+    entity: sensor.commute_time
 
-  - type: horizontal-stack
+  - type: vertical-stack
     cards:
-      - type: custom:mini-graph-card
-        icon: mdi-download-network
-        entities:
-          - sensor.speedtest_download
-        line_color: blue
-        line_width: 8
-        font_size: 75
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            icon: mdi:download-network
+            name: Bajada
+            entities:
+              - sensor.speedtest_download
+            line_color: light-blue
+            line_width: 8
+            font_size: 75
 
-      - type: custom:mini-graph-card
-        icon: mdi-upload-network
-        entities:
-          - sensor.speedtest_upload
-        line_color: blue
-        line_width: 8
-        font_size: 75
+          - type: custom:mini-graph-card
+            icon: mdi:upload-network
+            name: Subida
+            entities:
+              - sensor.speedtest_upload
+            line_color: light-blue
+            line_width: 8
+            font_size: 75
 
-      - type: custom:mini-graph-card
-        icon: mdi-timer
-        entities:
-          - sensor.speedtest_ping
-        line_color: blue
-        line_width: 8
-        font_size: 75
+          - type: custom:mini-graph-card
+            icon: mdi:speedometer
+            name: Ping
+            entities:
+              - sensor.speedtest_ping
+            line_color: light-blue
+            line_width: 8
+            font_size: 75
+
+      - type: entity-button
+        icon: mdi:reload
+        name: Test de Velocidad
+        tap_action:
+          action: call-service
+          service: speedtestdotnet.speedtest
 
   - type: custom:mini-graph-card
-    icon: mdi-gauge
+    icon: mdi:thermometer
+    entities:
+      - sensor.cpu_temperature
+    show:
+      labels: true
+    color_thresholds:
+      - value: 20
+        color: green
+      - value: 50
+        color: yellow
+      - value: 80
+        color: red
+
+  - type: custom:mini-graph-card
+    icon: mdi:memory
+    entities:
+      - sensor.memory_use_percent
+    show:
+      labels: true
+    color_thresholds:
+      - value: 20
+        color: green
+      - value: 50
+        color: yellow
+      - value: 80
+        color: red
+
+  - type: custom:mini-graph-card
+    icon: mdi:thermometer
     entities:
       - sensor.processor_use
     show:
@@ -56,20 +97,10 @@ cards:
   - type: horizontal-stack
     cards:
       - type: gauge
-        icon: mdi-disk
+        icon: mdi:harddisk
         name: Uso del Disco
         unit: '%'
-        entity: sensor.disk_use_percent
-        severity:
-          green: 0
-          yellow: 45
-          red: 85
-
-      - type: gauge
-        icon: mdi-memory
-        name: Uso de la Memoria
-        unit: '%'
-        entity: sensor.memory_use_percent
+        entity: sensor.disk_use_percent_home
         severity:
           green: 0
           yellow: 45
@@ -101,11 +132,13 @@ cards:
 
       - entity: sensor.time_online
         name: Tiempo Encendido
+        icon: mdi:timelapse
         hold_action:
           action: call-service
           service: homeassistant.restart # restarts HA when long-pressed
 
       - entity: sensor.version_installed
+        icon: mdi:information-outline
         tap_action:
           action: navigate
           navigation_path: /hassio/dashboard # goes to Hassio update section when tapped

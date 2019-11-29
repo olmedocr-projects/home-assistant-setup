@@ -1,4 +1,0 @@
----
-update_speedtest:
-  sequence:
-    - service: sensor.update_speedtest

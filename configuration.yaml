@@ -4,9 +4,9 @@
 # https://www.home-assistant.io/docs/configuration/basic/
 #
 homeassistant:
-  name: Casa
-  unit_system: metric
-  time_zone: !secret home_time_zone
+  # name: Casa
+  # unit_system: metric
+  # time_zone: !secret home_time_zone
   # Load packages
   packages: !include_dir_named integrations
 

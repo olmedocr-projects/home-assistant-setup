@@ -1,0 +1,4 @@
+---
+person.raul:
+  device_trackers:
+    - device_tracker.iphone_de_raul
