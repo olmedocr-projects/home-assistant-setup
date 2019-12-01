@@ -3,4 +3,5 @@
 # https://www.home-assistant.io/integrations/file/
 #
 platform: file
+name: Home Assistant Log
 file_path: /config/home-assistant.log

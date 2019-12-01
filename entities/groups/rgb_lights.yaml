@@ -1,0 +1,5 @@
+platform: group
+name: RGB Lights
+entities:
+  - light.led_stripe
+  - light.bedside_lamp

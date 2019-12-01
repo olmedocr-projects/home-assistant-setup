@@ -20,65 +20,67 @@ cards:
     entities:
       - entity: sensor.al_trabajo
 
-  - type: vertical-stack
-    cards:
-      - type: custom:mini-graph-card
-        icon: mdi:thermometer
-        name: Temperatura de la CPU
-        hour24: true
-        hours_to_show: 6
-        points_per_hour: 0.15
-        entities:
-          - sensor.cpu_temperature
-        show:
-          labels: true
-        color_thresholds:
-          - value: 0
-            color: '#388e3c'
-          - value: 55
-            color: '#ffeb3b'
-          - value: 70
-            color: '#d32f2f'
+  - type: custom:mini-graph-card
+    icon: mdi:thermometer
+    name: Temperatura de la CPU
+    hour24: true
+    hours_to_show: 6
+    points_per_hour: 2
+    entities:
+      - sensor.cpu_temperature
+    show:
+      labels: true
+    color_thresholds_transition: hard
+    color_thresholds:
+      - value: 0
+        color: '#388e3c'
+      - value: 55
+        color: '#ffeb3b'
+      - value: 70
+        color: '#d32f2f'
 
-      - type: custom:mini-graph-card
-        icon: mdi:memory
-        name: Uso de la RAM
-        hour24: true
-        hours_to_show: 6
-        points_per_hour: 0.15
-        entities:
-          - sensor.memory_use_percent
-        show:
-          labels: true
-        color_thresholds:
-          - value: 0
-            color: '#388e3c'
-          - value: 50
-            color: '#ffeb3b'
-          - value: 80
-            color: '#d32f2f'
+  - type: custom:mini-graph-card
+    icon: mdi:memory
+    name: Uso de la RAM
+    hour24: true
+    hours_to_show: 6
+    points_per_hour: 2
+    entities:
+      - sensor.memory_use_percent
+    show:
+      labels: true
+    color_thresholds_transition: hard
+    color_thresholds:
+      - value: 0
+        color: '#388e3c'
+      - value: 50
+        color: '#ffeb3b'
+      - value: 80
+        color: '#d32f2f'
 
-      - type: custom:mini-graph-card
-        icon: mdi:memory
-        name: Uso de la CPU
-        hour24: true
-        hours_to_show: 6
-        points_per_hour: 0.15
-        entities:
-          - sensor.processor_use
-        show:
-          labels: true
-        color_thresholds:
-          - value: 0
-            color: '#388e3c'
-          - value: 50
-            color: '#ffeb3b'
-          - value: 80
-            color: '#d32f2f'
+  - type: custom:mini-graph-card
+    icon: mdi:memory
+    name: Uso de la CPU
+    hour24: true
+    hours_to_show: 6
+    points_per_hour: 2
+    entities:
+      - sensor.processor_use
+    show:
+      labels: true
+    color_thresholds_transition: hard
+    color_thresholds:
+      - value: 0
+        color: '#388e3c'
+      - value: 50
+        color: '#ffeb3b'
+      - value: 80
+        color: '#d32f2f'
 
   - type: custom:bar-card
     title: Almacenamiento
     icon: mdi:hard-disk
+    width: 60
     entity: sensor.disk_use_percent_home
     severity:
     - value: 33
@@ -107,7 +109,7 @@ cards:
         icon: mdi:file-alert-outline
         tap_action:
           action: navigate
-          navigation_path: /dev-info # goes to log in HA when tapped
+          navigation_path: /developer-tools/logs # goes to log in HA when tapped
         hold_action:
           action: call-service
           service: system_log.clear # clears log in HA when long-pressed

@@ -10,5 +10,19 @@ cards:
       - light.desk_lamp
     title: Luces
 
+  - type: entities
+    entities:
+      - light.led_stripe
+      - light.bedside_lamp
+    title: Luces RGB
+
+  - type: custom:auto-entities
+    card:
+      type: entities
+    entities:
+    filter:
+      include:
+        group: group.rgb_lights
+
   - type: media-control
     entity: media_player.playstation_4

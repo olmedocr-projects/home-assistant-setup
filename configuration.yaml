@@ -3,12 +3,8 @@
 #
 #
 homeassistant:
-  name: Casa
-  unit_system: metric
-  time_zone: !secret home_time_zone
-  elevation: !secret home_elevation
-
   # Load packages
   packages: !include_dir_named integrations
+
   whitelist_external_dirs:
       - /config

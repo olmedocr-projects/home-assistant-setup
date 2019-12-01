@@ -1,0 +1,6 @@
+---
+#
+# https://github.com/thomasloven/lovelace-auto-entities
+#
+url: /local/auto-entities.js
+type: module
